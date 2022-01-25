@@ -1,0 +1,25 @@
+NODE monthly_bill_per_WS
+SQL >
+
+    %
+    SELECT
+        workspaceId,
+        {% if defined(userId) %}
+        userId,
+        {% end %}
+        month,
+        sum(month_balance) as month_balance
+    FROM ds_mv_grouped_data_sum
+    where workspaceId = {{String(workspace_id, '00015f9b-6ca4-4c17-b42a-4c63b31eb78c')}}
+    and month = {{String(month_selected, '2021-12-01')}}
+    {% if defined(userId) %}
+    and userId = {{String(user_id, 'UfTzY4mFAbSrTNDEN0gvXBVSXjz1')}}
+    {% end %}
+    GROUP BY
+        workspaceId,
+        {% if defined(userId) %}
+        userId,
+        {% end %}
+        month
+
+

@@ -1,0 +1,18 @@
+NODE retrieve
+SQL >
+
+    SELECT
+        workspaceId,
+        userId,
+        toStartOfMonth(ts) AS month,
+        sum(totalBalance) AS month_balance
+    FROM usage_1
+    GROUP BY
+        workspaceId,
+        userId,
+        month
+
+TYPE materialized
+DATASOURCE ds_mv_grouped_data_sum
+
+

@@ -1,0 +1,24 @@
+NODE range_bill_per_WS
+SQL >
+
+    %
+    SELECT
+        workspaceId,
+        {% if defined(userId) %}
+            userId,
+        {% end %}
+        sum(daily_balance) as daily_balance
+    FROM ds_mv_grouped_data_sum_daily
+    where workspaceId = {{String(workspace_id, '002a29aa-8ae1-4bde-9835-89b62ccf9558')}}
+    and day between {{String(day_selected, '2021-12-05')}} AND {{String(day_selected, '2021-12-15')}}
+    {% if defined(userId) %}
+        and userId = {{String(user_id, 'xn10QBBYPLRgvoelDITwL0f0Dw13')}}
+    {% end %}
+    GROUP BY
+        workspaceId
+        {% if defined(userId) %}
+            ,
+            userId
+        {% end %}
+
+

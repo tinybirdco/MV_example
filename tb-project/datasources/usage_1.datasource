@@ -1,0 +1,25 @@
+
+SCHEMA >
+    `documentId` String `json:$.documentId`,
+    `id` String `json:$.id`,
+    `inputRiskLevel` Int16 `json:$.inputRiskLevel`,
+    `inputWordCount` Int16 `json:$.inputWordCount`,
+    `outputWordCount` Int16 `json:$.outputWordCount`,
+    `projectId` String `json:$.projectId`,
+    `requestId` String `json:$.requestId`,
+    `skillId` String `json:$.skillId`,
+    `translation` String `json:$.translation`,
+    `ts` DateTime `json:$.ts`,
+    `userId` String `json:$.userId`,
+    `workspaceId` String `json:$.workspaceId`,
+    `nValue` Int16 `json:$.nValue`,
+    `planBalance` Nullable(Int32) `json:$.planBalance`,
+    `planPaused` Nullable(UInt8) `json:$.planPaused`,
+    `planUnlimited` Nullable(UInt8) `json:$.planUnlimited`,
+    `totalBalance` Nullable(Int32) `json:$.totalBalance`,
+    `trialing` Nullable(UInt8) `json:$.trialing`,
+    `deviceToken` Nullable(String) `json:$.deviceToken`
+
+ENGINE "MergeTree"
+ENGINE_PARTITION_KEY "toYYYYMM(ts)"
+ENGINE_SORTING_KEY "workspaceId, userId, ts"

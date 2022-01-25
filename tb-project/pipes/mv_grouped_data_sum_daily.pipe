@@ -1,0 +1,18 @@
+NODE retrieve
+SQL >
+
+    SELECT
+        workspaceId,
+        userId,
+        toDate(ts) AS day,
+        sum(totalBalance) AS daily_balance
+    FROM usage_1
+    GROUP BY
+        workspaceId,
+        userId,
+        day
+
+TYPE materialized
+DATASOURCE ds_mv_grouped_data_sum_daily
+
+

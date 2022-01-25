@@ -1,0 +1,15 @@
+NODE monthly_bill_per_WS
+SQL >
+
+    %
+    SELECT
+        workspaceId,
+        toStartOfMonth(day) as month,
+        sum(daily_balance) as monthly_balance
+    FROM ds_mv_grouped_data_sum_daily
+    where workspaceId = {{String(workspace_id, '002a29aa-8ae1-4bde-9835-89b62ccf9558')}}
+    GROUP BY
+        workspaceId,
+        month
+
+
